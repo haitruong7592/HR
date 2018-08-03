@@ -1,0 +1,31 @@
+.data-table {
+  width: 80%;
+  margin: 20px auto;
+}
+.show-data{
+  width: 100%;
+}
+.example-form {
+  min-width: 100px;
+  max-width: 500px;
+  width: 100%;
+  margin-left: 150px;
+}
+.example-form1{
+  margin-left: 120px;
+}
+
+.example-form1 button{
+  margin:20px;
+  background: #A9BCF5;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.mat-row:hover {
+  background-color: red;
+}
+.selected1{
+  background-color: green;
+}
