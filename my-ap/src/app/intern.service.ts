@@ -12,8 +12,14 @@ export class InternService {
   getInterns(): Observable<Intern[]> {
     return of(INTERNS);
   }
-  interns: Intern[] = [];
-  addIntern (intern: Intern): Observable<Intern> {
-    return this.interns.push(intern);
+  addIntern (intern: Intern): any {
+    return of(INTERNS.push(intern));
+  }
+
+  deleteIntern(intern: Intern): any {
+    for (var i = 0; INTERNS.length; i++){
+      if(INTERNS[i].code == intern.code && INTERNS[i].name== intern.name)
+        return of(INTERNS.splice(i,1));
+    }
   }
 }

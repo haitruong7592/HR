@@ -10,7 +10,7 @@
     width: 100%;
   }
 
-  button {
+  /* button {
     background-color: #eee;
     border: none;
     padding: 5px 10px;
@@ -21,10 +21,25 @@
   }
   
   button:hover {
-    background-color: #cfd8dc;
-  }
+    background-color: #d851a4;
+  } */
 
   table {
     width: 100%;
   }
   
+  /* .class-button{
+    margin-left: 120px;
+  } */
+
+  .class-button button{
+    margin:20px;
+    /* background-color: rgb(153, 197, 241); */
+  }
+  
+  .mat-row:hover {
+    background-color: rgb(197, 243, 241);
+  }
+  .selected{
+    background-color: rgb(250, 26, 26) !important;
+  }

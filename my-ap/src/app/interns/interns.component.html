@@ -1,24 +1,27 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<!-- [ngModel]="selectedIntern.code"
+[ngModel]="selectedIntern.name" -->
 <div class="mat-app-background basic-container">
     <form class="example-form">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Entern code" #internCode />
+          <input matInput placeholder="Entern code"  name = "code" #internCode  value={{selectedIntern.code}}/>
         </mat-form-field>
       <br/>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Entern name" #internName />
+            <input matInput placeholder="Entern name"  name = "name" #internName value={{selectedIntern.name}}/>
           </mat-form-field>
       </form>
 </div>
 
-<div class= "mat-button">
-    <button mat-button>New</button>
-    <button mat-button>Update</button>
-    <button mat-button (click)="internCode.value=''; internName.value=''">Cancel</button>
-    <button mat-button (click)="add(internCode.value, internName.value); internCode.value=''; internName.value=''">Save</button>
-    <button mat-button>Delete</button>
-</div>
+<form class= "class-button">
+    <button mat-raised-button *ngIf="isnew" (click)="selectNew(); internCode.value=''; internName.value=''" color="primary">New</button>
+    <button mat-raised-button *ngIf="isupdate" (click)="selectUpdate()" color="primary">Update</button>
+    <button mat-raised-button *ngIf="isclear" (click)="internCode.value=''; internName.value=''" color="warn">Clear</button>
+    <button mat-raised-button *ngIf="iscancel" (click)="selectCancelSave(); internCode.value=''; internName.value=''" color="warn">Cancel</button>
+    <button mat-raised-button *ngIf="issave" (click)="add(internCode.value, internName.value); selectCancelSave(); internCode.value=''; internName.value=''" color="warn">Save</button>
+    <button mat-raised-button *ngIf="isdelete" (click)="delete(internCode.value, internName.value); internCode.value=''; internName.value=''" color="primary">Delete</button>
+    <button mat-raised-button *ngIf="issearch" color="primary">Search</button>
+  </form>
 
 
 <div class="mat-elevation-z8">
@@ -43,7 +46,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [class.selected]="row===selectedIntern" (click)="onRowClicked(row)"></tr>
   </table>
 
   <mat-paginator #paginator

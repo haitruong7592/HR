@@ -13,12 +13,19 @@ import { Observable, of as observableOf, merge } from 'rxjs';
   styleUrls: ['./interns.component.css']
 })
 export class InternsComponent implements OnInit {
+  isnew: boolean= true;
+  isupdate: boolean= true;
+  isclear: boolean= false;
+  iscancel: boolean= false;
+  issave: boolean= false;
+  isdelete: boolean= true;
+  issearch: boolean= true;
  // interns: Intern[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
   dataSource: DataTableDataSource;
 
-  displayedColumns = ['id', 'code', 'name'];
+  displayedColumns = ['code', 'name'];
 
   constructor(private internService: InternService) { }
 
@@ -37,7 +44,46 @@ export class InternsComponent implements OnInit {
       });
   }
 
-  onRowClicked(row) {
+  delete(code: string, name:string): void {
+    code = code.trim();
+    name = name.trim();
+    this.internService.deleteIntern({code, name} as Intern)
+      .subscribe(intern =>{
+        this.dataSource = new DataTableDataSource(this.internService, this.paginator);
+      });
+  }
+
+  selectNew(): void{
+    this.isclear = true;
+    this.iscancel = true;
+    this.issave = true;
+    this.isupdate = false;
+    this.isdelete = false;
+    this.issearch = false;
+  }
+
+  selectUpdate(): void{
+    this.isclear = true;
+    this.iscancel = true;
+    this.issave = true;
+    this.isnew = false;
+    this.isdelete = false;
+    this.issearch = false;
+  }
+
+  selectCancelSave(): void{
+    this.isnew = true;
+    this.isupdate = true;
+    this.isclear = false;
+    this.iscancel = false;
+    this.issave = false;
+    this.isdelete = true;
+    this.issearch = true;
+  }
+
+  selectedIntern: Intern = { code: '', name: ''};
+  onRowClicked(row: Intern) {
+    this.selectedIntern = row;
     console.log('Row clicked: ', row);
   }
   
